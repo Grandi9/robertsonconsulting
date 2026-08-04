@@ -20,7 +20,7 @@
         <a href="#where-we-work">Where We Work</a>
         <a href="#use-cases">Use Cases</a>
         <a href="#about">About</a>
-        <a href="#contact" class="nav-cta">Contact</a>
+        <button type="button" class="nav-cta js-open-lead">Contact</button>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -44,7 +44,7 @@
         once it is live. That role is real work, but it rarely justifies a $300&ndash;400K hire.
       </p>
       <p class="hero-lede">Robertson Consulting holds that seat on a fractional basis.</p>
-      <a href="#contact" class="btn">Start a Conversation</a>
+      <button type="button" class="btn js-open-lead">Start a Conversation</button>
     </div>
   </section>
 
@@ -135,6 +135,31 @@
     <p>&copy; <span id="year"></span> Robertson Consulting. All rights reserved.</p>
   </div>
 </footer>
+
+<div class="modal-overlay" id="leadOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+    <button type="button" class="modal-close" id="leadClose" aria-label="Close">&times;</button>
+
+    <div class="modal-body" id="leadFormState">
+      <p class="modal-eyebrow">Fractional Technology &amp; AI Leadership</p>
+      <h3 id="leadTitle">Let&rsquo;s Talk</h3>
+      <p class="modal-sub">Leave your email and a couple lines on what you&rsquo;re working on &mdash; we&rsquo;ll follow up.</p>
+      <form id="leadForm" class="lead-form" novalidate>
+        <label for="leadEmail">Email</label>
+        <input type="email" id="leadEmail" name="email" required placeholder="you@company.com" autocomplete="email">
+        <label for="leadMessage">What are you hoping to solve?</label>
+        <textarea id="leadMessage" name="message" rows="2" placeholder="A couple of lines is plenty."></textarea>
+        <button type="submit" class="btn btn-block">Send</button>
+      </form>
+    </div>
+
+    <div class="modal-body modal-success" id="leadSuccessState" hidden>
+      <p class="modal-eyebrow">Thank You</p>
+      <h3>Message Received</h3>
+      <p class="modal-sub">We&rsquo;ll be in touch shortly.</p>
+    </div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
