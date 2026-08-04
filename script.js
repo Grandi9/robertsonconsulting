@@ -53,8 +53,34 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !leadOverlay.hidden) closeLeadModal();
 });
 
+const LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyAkz-8nVBURbbbJ7ldprSmyRkZIhVL0RgpUG_jQWRxqLD-rzgxjn0ywhV52rDgpkzlgA/exec';
+
 leadForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  leadFormState.hidden = true;
-  leadSuccessState.hidden = false;
+
+  const submitBtn = leadForm.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+
+  const payload = {
+    email: document.getElementById('leadEmail').value,
+    message: document.getElementById('leadMessage').value
+  };
+
+  fetch(LEAD_ENDPOINT, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
+  })
+    .catch(() => {
+      // Apps Script web apps don't return readable CORS responses in no-cors
+      // mode, so network-level failures are the only errors we can catch.
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send';
+      leadFormState.hidden = true;
+      leadSuccessState.hidden = false;
+    });
 });
