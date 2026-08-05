@@ -227,6 +227,29 @@ a { color: inherit; text-decoration: none; }
 .tile {
   background: var(--paper);
   padding: 32px 28px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease;
+}
+
+.tile:hover::before { transform: scaleX(1); }
+
+.tile:hover { background: #fbfaf8; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tile::before { transition: none; }
 }
 
 .tile h3 {
